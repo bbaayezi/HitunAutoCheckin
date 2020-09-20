@@ -22,5 +22,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Install uni2ascii
+        run: |
+          sudo apt-get update
+          sudo apt-get install uni2ascii
       - name: Run checkin process
-        run: curl -X POST --silent --output /dev/null -F 'email=${{ secrets.HITUN_EMAIL }}' -F 'passwd=${{ secrets.HITUN_PASSWORD }}' -c - https://hitun.io/auth/login | curl -X POST --silent -L -b @- https://hitun.io/user/checkin
+        run: curl -X POST --silent --output /dev/null -F 'email=${{ secrets.HITUN_EMAIL }}' -F 'passwd=${{ secrets.HITUN_PASSWORD }}' -c - https://hitun.io/auth/login | curl -X POST --silent -L -b @- https://hitun.io/user/checkin | ascii2uni -a U -q | grep -Po '(?<="msg":")[^"]*'
