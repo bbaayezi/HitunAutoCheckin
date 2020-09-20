@@ -25,5 +25,4 @@ jobs:
       - name: Run checkin process
         run: curl -X POST --silent --output /dev/null \
           -F 'email=${{ secrets.HITUN_EMAIL }}' -F 'passwd=${{ secrets.HITUN_PASSWORD }}' \
-          -c - https://hitun.io/auth/login \
-          | curl -X POST --silent -L -b @- https://hitun.io/user/checkin
+          -c - https://hitun.io/auth/login | curl -X POST --silent -L -b @- https://hitun.io/user/checkin
